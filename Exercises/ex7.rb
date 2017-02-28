@@ -27,7 +27,7 @@ students = [
 
 def input_students
     # create and empty array
-  @students = []
+  @students = [Hash.new("N/A")]
 
  # Gets all input from the user
   def get_input
@@ -40,7 +40,7 @@ def input_students
     # Gets cohort
     def get_cohort
     puts "Please enter the cohort they will be joining."
-    @cohort = gets.chomp
+    @cohort = gets.chomp.to_sym
       end
 
     # Checks input
@@ -49,7 +49,7 @@ def input_students
     @correct = gets.chomp
       if @correct == "Y" || @correct == "y"
         @students << {name: @name, cohort: @cohort}
-        puts "Now we have #{@students.count} students"
+        puts "Now we have #{(@students.count)-1} students"
           end
         end
 
@@ -91,13 +91,13 @@ def count(students)
 end
 
 def print(students)
-  @students.each do |student|
+  @students.drop(1).each do |student|
     puts "#{student[:name]}".center(50)
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students."
+  puts "Overall, we have #{(@students.count)-1} great students."
 end
 
 #finally, we print the total number of students
