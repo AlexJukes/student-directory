@@ -34,18 +34,21 @@ def input_students
     # gets the first name
     def get_name
     puts "Please enter the name of the students."
-    @name = gets.chop
+    @name = gets.chomp
       end
 
     def get_cohort
     puts "Please enter the cohort they will be joining."
-    @cohort = gets.chop
+    @cohort = gets.chomp
       end
 
     # Checks input
     def check
+      if @name.empty?
+        puts "There's nothing here"
+      else
       puts "#{@name} will be joining #{@cohort} cohort. Is this correct? Y/N"
-    @correct = gets.chop
+    @correct = gets.chomp
       if @correct == "Y" || @correct == "y"
         @students << {name: @name, cohort: @cohort}
         if @students.count < 2
@@ -54,12 +57,13 @@ def input_students
         puts "Now we have #{(@students.count)} students"
           end
         end
+      end
         end
 
     #Checks if the user wants to continue
     def continue
       puts "Would you like to enter another name? Y/N"
-      @cont = gets.chop
+      @cont = gets.chomp
       end
 
    #Ask the user for all relevant inputs and checks.
@@ -94,7 +98,9 @@ end
 
 # Creates new hash to store students in each month
 def print_cohorts(students)
-  require 'date'
+  if @name.empty?
+    puts "There's nothing here"
+  else
   #Returns an array containing only the unique months
   cohorts = (students.map {|student| student[:cohort]}.uniq)
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -111,6 +117,7 @@ def print_cohorts(students)
      end
 
   end
+end
 end
 
 
