@@ -1,21 +1,21 @@
 def save_students(filename)
   # open the file for writing
-  file = File.open(filename, "w")
+ File::open(filename, "w") do |f|
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
-    file.puts csv_line
+    f.puts csv_line
   end
-  file.close
+end
 end
 def load_students(filename = "students.csv")
-      file = File.open(filename, "r")
-      file.readlines.each do |line|
+      File::open(filename, "r") do |f|
+      f.readlines.each do |line|
         name, cohort = line.chomp.split(',')
         add_students(name, cohort)
       end
-        file.close
+    end
     end
 
 def try_load_students
